@@ -17,6 +17,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlayerDataPlugin extends JavaPlugin implements Listener {
@@ -127,29 +128,8 @@ public class PlayerDataPlugin extends JavaPlugin implements Listener {
 
 		}
 
-		// fetch playerdata from file
-
-		// cut out the player's data from file to make fetching easier
-		ConfigurationSection section = data.getConfigurationSection(player.getUniqueId().toString());
-
-		// if the player doesn't have stored data, add an empty data.
-		if (section == null) {
-
-			playerData.put(player.getUniqueId(), new PlayerData());
-			return;
-
-		}
-
-		HashMap<String, String> storedData = new HashMap<String, String>();
-
-		// transfer data from file to list
-		for (String key : section.getKeys(false)) {
-			storedData.put(key, section.getString(key));
-
-		}
-
 		// add to list
-		playerData.put(player.getUniqueId(), new PlayerData(storedData));
+		playerData.put(player.getUniqueId(), getOfflinePlayerData(player.getUniqueId()));
 
 	}
 
@@ -177,6 +157,30 @@ public class PlayerDataPlugin extends JavaPlugin implements Listener {
 
 	public PlayerData getPlayerData(UUID uuid) {
 		return playerData.get(uuid);
+
+	}
+
+	// use sparingly
+	public PlayerData getOfflinePlayerData(UUID uuid) {
+
+		// cut out the player's data from file to make fetching easier
+		ConfigurationSection section = data.getConfigurationSection(uuid.toString());
+
+		// if the player doesn't have stored data, return empty data.
+		if (section == null) {
+			return new PlayerData();
+
+		}
+
+		HashMap<String, String> storedData = new HashMap<String, String>();
+
+		// transfer data from file to list
+		for (String key : section.getKeys(false)) {
+			storedData.put(key, section.getString(key));
+
+		}
+
+		return new PlayerData(storedData);
 
 	}
 
@@ -209,6 +213,8 @@ public class PlayerDataPlugin extends JavaPlugin implements Listener {
 		playerData = new HashMap<UUID, PlayerData>();
 
 		Bukkit.getPluginManager().registerEvents(this, this);
+
+		Bukkit.getServer().getServicesManager().register(PlayerDataPlugin.class, this, this, ServicePriority.Normal);
 
 	}
 

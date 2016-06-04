@@ -34,6 +34,12 @@ public class PlayerData {
 
 	}
 
+	public boolean isEmpty() {
+
+		return data.isEmpty();
+
+	}
+
 	public HashMap<String, String> getRawData() {
 
 		return data;
