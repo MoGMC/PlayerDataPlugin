@@ -18,6 +18,6 @@ PlayerData myPlayerData = myDatabase.getPlayerData(playerUuid);
 String myData = myPlayerData.getString("my_key");
 ```
 
-Please note that `getPlayerData(uuid)` will only get online player's data while `getOfflinePlayerData(uuid)` fetches the data from storage.
+Please note that `getPlayerData()` will only get online player's data while `getOfflinePlayerData()` fetches the data from storage.
 
-Please use `getOfflinePlayerData(uuid)` _only_ in cases where you need an offline player's data, as it has to search the entire storage for the player. (v.s. `getPlayerData(uuid)`, which is limited to online players)
+Please use `getOfflinePlayerData()` _only_ in cases where you need an offline player's data, as it has to search the entire storage for the player. (v.s. `getPlayerData()`, which is limited to online players)
