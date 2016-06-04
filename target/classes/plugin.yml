@@ -1,0 +1,11 @@
+name: PlayerDataPlugin
+main: com.monkeygamesmc.plugin.playerdata.PlayerDataPlugin
+version: 0.1
+load: STARTUP
+commands:
+  showplayerdata:
+    usage: /showplayerdata <player>
+    permission: playerdata.showplayerdata
+  setplayerdata:
+    usage: /setplayerdata <player> <key> <data>
+    permission: playerdata.setplayerdata
