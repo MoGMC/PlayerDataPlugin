@@ -118,8 +118,6 @@ public class PlayerDataPlugin extends JavaPlugin implements Listener {
 
 	private void loadPlayerData(Player player) {
 
-		System.out.println("AJIOJ");
-
 		// create empty data for players who haven't played before
 		if (!player.hasPlayedBefore()) {
 
