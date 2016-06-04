@@ -28,7 +28,7 @@ public class PlayerData {
 	}
 
 	// for booleans
-	public boolean hasData(String key) {
+	public boolean isSet(String key) {
 
 		return data.containsKey(key);
 
