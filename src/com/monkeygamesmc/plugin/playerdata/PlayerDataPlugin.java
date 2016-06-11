@@ -97,7 +97,7 @@ public class PlayerDataPlugin extends JavaPlugin implements Listener {
 
 		}
 
-		@EventHandler
+		@EventHandler(priority = EventPriority.NORMAL)
 		public void onPlayerJoin(PlayerJoinEvent e) {
 
 			loadPlayerData(e.getPlayer());
