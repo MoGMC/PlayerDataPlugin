@@ -23,4 +23,4 @@ Please note that `getPlayerData()` will only get _online_ player data while `get
 
 Please use `getOfflinePlayerData()` _only_ in cases where you need an offline player's data, as it has to search the entire storage for the player, possibly slowing things down. (v.s. `getPlayerData()`, which is limited to online players)
 
-When listening for player join events, please use `EventPriority.HIGHEST`.
+When listening for player join events, please use `EventPriority.NORMAL` or higher.
